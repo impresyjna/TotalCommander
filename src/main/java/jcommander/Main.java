@@ -32,7 +32,7 @@ public class Main extends Application {
             // Load root layout from fxml file.
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("views/sample.fxml"));
+            loader.setLocation(getClass().getClassLoader().getResource("sample.fxml"));
             rootLayout = loader.load();
 
             // Show the scene containing the root layout.
@@ -49,7 +49,7 @@ public class Main extends Application {
         // Load person overview.
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("views/main_view.fxml"));
+            loader.setLocation(getClass().getClassLoader().getResource("main_view.fxml"));
             AnchorPane personOverview = loader.load();
 
 
