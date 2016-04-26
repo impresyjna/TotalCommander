@@ -28,7 +28,7 @@
                   <MenuItem id="splitFileOption" mnemonicParsing="false" text="Podziel plik" />
                   <MenuItem id="mergeFileOption" mnemonicParsing="false" text="Scalaj plik" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Zakończ" onAction="#closeApp"/>
+              <MenuItem mnemonicParsing="false" onAction="#closeApp" text="%app.close" />
             </items>
           </Menu>
           <Menu id="selectMenu" mnemonicParsing="false" text="Zaznacz">
@@ -63,6 +63,12 @@
             <Menu id="configurationMenu" mnemonicParsing="false" text="Konfiguracja">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Język">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#changeLanguageToEnglish" text="Angielski" />
+                  <MenuItem mnemonicParsing="false" onAction="#changeLanguageToPolish" text="Polski" />
               </items>
             </Menu>
             <Menu id="startMenu" mnemonicParsing="false" text="Start">

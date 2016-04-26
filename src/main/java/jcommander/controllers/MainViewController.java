@@ -5,10 +5,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import jcommander.Main;
 import jcommander.models.FileModelForApp;
+import jcommander.utils.AppBundle;
 import jcommander.utils.FilesUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 public class MainViewController {
 
@@ -42,6 +44,7 @@ public class MainViewController {
                 try
 
                 {
+                    //TODO: Change this to open good directory list
                     leftTable.setItems(new FilesUtils().fileList(new File(".").getCanonicalPath()));
                 } catch (
                         IOException e
@@ -79,5 +82,21 @@ public class MainViewController {
     @FXML
     private void closeApp(ActionEvent event){
         Platform.exit();
+    }
+
+    @FXML
+    private void changeLanguageToEnglish(ActionEvent event) {
+        AppBundle bundleUtil = AppBundle.getInstance();
+        if(!bundleUtil.getCurrentLocale().getLanguage().equals("en")) {
+            AppBundle.getInstance().setCurrentLocale("en");
+        }
+    }
+
+    @FXML
+    private void changeLanguageToPolish(ActionEvent event) {
+        AppBundle bundleUtil = AppBundle.getInstance();
+        if(!bundleUtil.getCurrentLocale().getLanguage().equals("pl")) {
+            AppBundle.getInstance().setCurrentLocale("pl");
+        }
     }
 }
