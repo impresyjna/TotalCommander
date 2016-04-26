@@ -10,7 +10,9 @@ public class FileTypeComparator implements Comparator<File> {
 
     @Override
     public int compare(File file1, File file2) {
-
+        if(file1.getName().equals("[...]") && file1.isDirectory()){
+            return -2;
+        }
         if (file1.isDirectory() && file2.isFile())
             return -1;
         if (file1.isDirectory() && file2.isDirectory()) {

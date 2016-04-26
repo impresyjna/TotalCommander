@@ -39,8 +39,8 @@ public class MainViewController {
 
     public void setMainApp(Main mainApp) {
         this.main = mainApp;
-        new Thread() {
-            public void run() {
+        /* new Thread() {
+            public void run() { */
                 try
 
                 {
@@ -65,8 +65,8 @@ public class MainViewController {
                 {
                     e.printStackTrace();
                 }
-            }
-        }.start();
+          /*  }
+        }.start(); */
     }
 
     @FXML
