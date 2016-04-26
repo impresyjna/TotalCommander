@@ -3,7 +3,9 @@ package jcommander.controllers;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import jcommander.Main;
+import jcommander.comparators.SizeComparator;
 import jcommander.models.FileModelForApp;
 import jcommander.utils.AppBundle;
 import jcommander.utils.FilesUtils;
@@ -77,6 +79,7 @@ public class MainViewController {
         nameColumnRight.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         sizeColumnRight.setCellValueFactory(cellData -> cellData.getValue().sizeProperty());
         dateColumnRight.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        sizeColumnLeft.setComparator(new SizeComparator());
     }
 
     @FXML
