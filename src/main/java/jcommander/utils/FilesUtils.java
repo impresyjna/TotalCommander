@@ -34,14 +34,7 @@ public class FilesUtils {
             }
             Collections.sort(files, Ordering.from(new FileTypeComparator()).compound(new FileNameComparator()));
             for (File tempFile : files) {
-                Path p = Paths.get(tempFile.getAbsolutePath());
-                BasicFileAttributes attr = null;
-                try {
-                    attr = Files.readAttributes(p, BasicFileAttributes.class);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                String formattedDate = df.format(attr.creationTime().toMillis());
+                String formattedDate = df.format(getAttributeOfFile(tempFile).creationTime().toMillis());
                 if (tempFile.isDirectory()) {
                     listOfFiles.add(new FileModelForApp(tempFile.getName(), "<DIR>", formattedDate));
                 } else if(tempFile.isFile()){
