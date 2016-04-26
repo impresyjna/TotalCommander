@@ -87,7 +87,7 @@ public class MainViewController {
     @FXML
     private void initialize() {
         initializeLeftTab();
-        initalizeRightTab();
+        initializeRightTab();
     }
 
     private void initializeLeftTab() {
@@ -106,7 +106,7 @@ public class MainViewController {
         });
     }
 
-    private void initalizeRightTab(){
+    private void initializeRightTab(){
         nameColumnRight.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         sizeColumnRight.setCellValueFactory(cellData -> cellData.getValue().sizeProperty());
         dateColumnRight.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
