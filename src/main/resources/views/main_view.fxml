@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jcommander.controllers.MainViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jcommander.controllers.MainViewController">
    <children>
       <MenuBar fx:id="TopMenuBar" prefHeight="29.0" prefWidth="1024.0">
         <menus>
@@ -70,27 +74,104 @@
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </HBox>
-      <Pane layoutY="88.0" prefHeight="712.0" prefWidth="512.0" style="-fx-background-color: #e0e0e0;">
+      <Pane layoutY="88.0" prefHeight="568.0" prefWidth="512.0" style="-fx-background-color: #e0e0e0;">
          <children>
-            <TableView fx:id="leftTable" layoutX="14.0" layoutY="29.0" prefHeight="663.0" prefWidth="484.0">
+            <TableView fx:id="leftTable" layoutX="14.0" layoutY="29.0" prefHeight="497.0" prefWidth="484.0">
               <columns>
                 <TableColumn fx:id="nameColumnLeft" maxWidth="1.7976931348623157E308" prefWidth="147.0" text="%name.column.title" />
                 <TableColumn fx:id="sizeColumnLeft" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="%size.column.title" />
                   <TableColumn fx:id="dateColumnLeft" maxWidth="1.7976931348623157E308" prefWidth="136.0" text="%time.column.title" />
               </columns>
             </TableView>
+            <Label layoutX="15.0" layoutY="6.0" prefHeight="17.0" prefWidth="476.0" text="Label" />
          </children>
       </Pane>
-      <Pane layoutX="511.0" layoutY="88.0" prefHeight="712.0" prefWidth="512.0" style="-fx-background-color: #e0e0e0;">
+      <Pane layoutX="511.0" layoutY="88.0" prefHeight="569.0" prefWidth="512.0" style="-fx-background-color: #e0e0e0;">
          <children>
-            <TableView fx:id="rightTable" layoutX="8.0" layoutY="29.0" prefHeight="663.0" prefWidth="484.0">
+            <TableView fx:id="rightTable" layoutX="12.0" layoutY="32.0" prefHeight="496.0" prefWidth="484.0">
                <columns>
                   <TableColumn fx:id="nameColumnRight" maxWidth="1.7976931348623157E308" prefWidth="147.0" text="%name.column.title" />
                   <TableColumn fx:id="sizeColumnRight" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="%size.column.title" />
                   <TableColumn fx:id="dateColumnRight" maxWidth="1.7976931348623157E308" prefWidth="136.0" text="%time.column.title" />
                </columns>
             </TableView>
+            <Label layoutX="18.0" layoutY="5.0" prefHeight="17.0" prefWidth="476.0" text="Label" />
          </children>
       </Pane>
+      <HBox alignment="CENTER" layoutY="657.0" prefHeight="58.0" prefWidth="1025.0">
+         <children>
+            <Label alignment="CENTER" maxWidth="-Infinity" prefHeight="38.0" prefWidth="116.0" text="F3 Podgląd" textAlignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <Label alignment="CENTER" prefHeight="38.0" prefWidth="95.0" text="F4 Edycja">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <Label alignment="CENTER" prefHeight="38.0" prefWidth="96.0" text="F5 Kopiuj">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <Label alignment="CENTER" prefHeight="38.0" prefWidth="118.0" text="F7 UtwKat">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <Label alignment="CENTER" prefHeight="38.0" prefWidth="95.0" text="F8 Usuń">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <Label alignment="CENTER" prefHeight="38.0" prefWidth="155.0" text="Alt+F4 Zakończ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

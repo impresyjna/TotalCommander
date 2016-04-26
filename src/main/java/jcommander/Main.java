@@ -45,7 +45,7 @@ public class Main extends Application implements Observer {
             AppBundle.getInstance().addObserver(this);
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
-            rootLayout.setPrefSize(1024, 800);
+            rootLayout.setPrefSize(1024, 720);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
