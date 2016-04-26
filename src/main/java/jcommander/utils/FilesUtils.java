@@ -29,23 +29,25 @@ public class FilesUtils {
         DateFormat df = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, AppBundle.getInstance().getCurrentLocale());
         if (file.isDirectory()) {
             List<File> files = Arrays.asList(file.listFiles());
-            if(file.getParentFile()!=null){
-                listOfFiles.add(new FileModelForApp("[...]", "<DIR>", ""));
+            if (file.getParentFile() != null) {
+                listOfFiles.add(new FileModelForApp("[...]", "<DIR>", "", file.getParentFile().getPath(), file.getParentFile().isDirectory()));
             }
             Collections.sort(files, Ordering.from(new FileTypeComparator()).compound(new FileNameComparator()));
             for (File tempFile : files) {
-                String formattedDate = df.format(getAttributeOfFile(tempFile).creationTime().toMillis());
-                if (tempFile.isDirectory()) {
-                    listOfFiles.add(new FileModelForApp(tempFile.getName(), "<DIR>", formattedDate));
-                } else if(tempFile.isFile()){
-                    listOfFiles.add(new FileModelForApp(tempFile.getName(), Long.toString(tempFile.length())+" B", formattedDate));
+                if (!tempFile.getName().startsWith(".")) {
+                    String formattedDate = df.format(getAttributeOfFile(tempFile).creationTime().toMillis());
+                    if (tempFile.isDirectory()) {
+                        listOfFiles.add(new FileModelForApp(tempFile.getName(), "<DIR>", formattedDate, tempFile.getPath(), tempFile.isDirectory()));
+                    } else if (tempFile.isFile()) {
+                        listOfFiles.add(new FileModelForApp(tempFile.getName(), Long.toString(tempFile.length()) + " B", formattedDate, tempFile.getPath(), tempFile.isDirectory()));
+                    }
                 }
             }
         }
         return listOfFiles;
     }
 
-    private static BasicFileAttributes getAttributeOfFile(File file){
+    private static BasicFileAttributes getAttributeOfFile(File file) {
         Path p = Paths.get(file.getAbsolutePath());
         BasicFileAttributes attr = null;
         try {

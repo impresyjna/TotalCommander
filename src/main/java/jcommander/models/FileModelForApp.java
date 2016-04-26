@@ -3,6 +3,7 @@ package jcommander.models;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.nio.file.Path;
 import java.util.Date;
 
 /**
@@ -10,13 +11,17 @@ import java.util.Date;
  */
 public class FileModelForApp {
     private StringProperty name = new SimpleStringProperty();
-    private StringProperty size = new SimpleStringProperty();;
-    private StringProperty date = new SimpleStringProperty();;
+    private StringProperty size = new SimpleStringProperty();
+    private StringProperty date = new SimpleStringProperty();
+    private String pathToFile;
+    private boolean isDirectory = false;
 
-    public FileModelForApp(String name, String size, String date) {
+    public FileModelForApp(String name, String size, String date, String path, boolean isDirectory) {
         this.name.set(name);
         this.size.set(size);
         this.date.set(date);
+        this.pathToFile = path;
+        this.isDirectory = isDirectory;
     }
 
     public StringProperty nameProperty() {
@@ -53,5 +58,21 @@ public class FileModelForApp {
 
     public String getDate() {
         return date.get();
+    }
+
+    public String getPathToFile() {
+        return pathToFile;
+    }
+
+    public void setPathToFile(String pathToFile) {
+        this.pathToFile = pathToFile;
+    }
+
+    public boolean isDirectory() {
+        return isDirectory;
+    }
+
+    public void setDirectory(boolean directory) {
+        isDirectory = directory;
     }
 }

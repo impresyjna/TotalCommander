@@ -41,32 +41,46 @@ public class MainViewController {
         this.main = mainApp;
         /* new Thread() {
             public void run() { */
-                try
+        try
 
-                {
-                    //TODO: Change this to open good directory list
-                    leftTable.setItems(new FilesUtils().fileList(new File(".").getCanonicalPath()));
-                } catch (
-                        IOException e
-                        )
+        {
+            //TODO: Change this to open good directory list
+            leftTable.setItems(new FilesUtils().fileList(new File(".").getCanonicalPath()));
+        } catch (
+                IOException e
+                )
 
-                {
-                    e.printStackTrace();
-                }
+        {
+            e.printStackTrace();
+        }
 
-                try
+        try
 
-                {
-                    rightTable.setItems(new FilesUtils().fileList(new File(".").getCanonicalPath()));
-                } catch (
-                        IOException e
-                        )
+        {
+            rightTable.setItems(new FilesUtils().fileList(new File(".").getCanonicalPath()));
+        } catch (
+                IOException e
+                )
 
-                {
-                    e.printStackTrace();
-                }
+        {
+            e.printStackTrace();
+        }
           /*  }
         }.start(); */
+    }
+
+    private void objectInLeftListListener(FileModelForApp file) {
+        System.out.println(file.getPathToFile());
+        if (file.isDirectory()) {
+            leftTable.setItems(new FilesUtils().fileList(file.getPathToFile()));
+        }
+    }
+
+    private void objectInRightListListener(FileModelForApp file) {
+        System.out.println(file.getPathToFile());
+        if (file.isDirectory()) {
+            rightTable.setItems(new FilesUtils().fileList(file.getPathToFile()));
+        }
     }
 
     @FXML
@@ -79,17 +93,25 @@ public class MainViewController {
         dateColumnRight.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         sizeColumnLeft.setComparator(new SizeComparator());
         sizeColumnRight.setComparator(new SizeComparator());
+        leftTable.getSelectionModel()
+                .selectedItemProperty()
+                .addListener(
+                        (observable, oldValue, newValue) -> objectInLeftListListener(newValue));
+        rightTable.getSelectionModel()
+                .selectedItemProperty()
+                .addListener(
+                        (observable, oldValue, newValue) -> objectInRightListListener(newValue));
     }
 
     @FXML
-    private void closeApp(ActionEvent event){
+    private void closeApp(ActionEvent event) {
         Platform.exit();
     }
 
     @FXML
     private void changeLanguageToEnglish(ActionEvent event) {
         AppBundle bundleUtil = AppBundle.getInstance();
-        if(!bundleUtil.getCurrentLocale().getLanguage().equals("en")) {
+        if (!bundleUtil.getCurrentLocale().getLanguage().equals("en")) {
             AppBundle.getInstance().setCurrentLocale("en");
         }
     }
@@ -97,7 +119,7 @@ public class MainViewController {
     @FXML
     private void changeLanguageToPolish(ActionEvent event) {
         AppBundle bundleUtil = AppBundle.getInstance();
-        if(!bundleUtil.getCurrentLocale().getLanguage().equals("pl")) {
+        if (!bundleUtil.getCurrentLocale().getLanguage().equals("pl")) {
             AppBundle.getInstance().setCurrentLocale("pl");
         }
     }
