@@ -28,7 +28,7 @@
                   <MenuItem id="splitFileOption" mnemonicParsing="false" text="Podziel plik" />
                   <MenuItem id="mergeFileOption" mnemonicParsing="false" text="Scalaj plik" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem id="closeOption" mnemonicParsing="false" text="Zakończ" />
+              <MenuItem mnemonicParsing="false" text="Zakończ" onAction="#closeApp"/>
             </items>
           </Menu>
           <Menu id="selectMenu" mnemonicParsing="false" text="Zaznacz">
@@ -97,11 +97,11 @@
       </Pane>
       <Pane layoutX="511.0" layoutY="88.0" prefHeight="712.0" prefWidth="512.0" style="-fx-background-color: #e0e0e0;">
          <children>
-            <TableView fx:id="right_table" layoutX="8.0" layoutY="29.0" prefHeight="663.0" prefWidth="484.0">
+            <TableView fx:id="rightTable" layoutX="8.0" layoutY="29.0" prefHeight="663.0" prefWidth="484.0">
                <columns>
-                  <TableColumn id="nameTableColumn" maxWidth="1.7976931348623157E308" prefWidth="147.0" text="Nazwa" />
-                  <TableColumn id="sizeTableColumn" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="Wielkość" />
-                  <TableColumn id="timeTableColumn" maxWidth="1.7976931348623157E308" prefWidth="136.0" text="Czas" />
+                  <TableColumn fx:id="nameColumnRight" maxWidth="1.7976931348623157E308" prefWidth="147.0" text="Nazwa" />
+                  <TableColumn fx:id="sizeColumnRight" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="Wielkość" />
+                  <TableColumn fx:id="dateColumnRight" maxWidth="1.7976931348623157E308" prefWidth="136.0" text="Czas" />
                </columns>
             </TableView>
          </children>

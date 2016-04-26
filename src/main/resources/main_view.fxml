@@ -28,7 +28,7 @@
                   <MenuItem id="splitFileOption" mnemonicParsing="false" text="Podziel plik" />
                   <MenuItem id="mergeFileOption" mnemonicParsing="false" text="Scalaj plik" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem id="closeOption" mnemonicParsing="false" text="Zakończ" />
+              <MenuItem mnemonicParsing="false" text="Zakończ" onAction="#closeApp"/>
             </items>
           </Menu>
           <Menu id="selectMenu" mnemonicParsing="false" text="Zaznacz">
