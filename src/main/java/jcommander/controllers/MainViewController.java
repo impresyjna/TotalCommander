@@ -93,14 +93,22 @@ public class MainViewController {
         dateColumnRight.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         sizeColumnLeft.setComparator(new SizeComparator());
         sizeColumnRight.setComparator(new SizeComparator());
-        leftTable.getSelectionModel()
-                .selectedItemProperty()
-                .addListener(
-                        (observable, oldValue, newValue) -> objectInLeftListListener(newValue));
-        rightTable.getSelectionModel()
-                .selectedItemProperty()
-                .addListener(
-                        (observable, oldValue, newValue) -> objectInRightListListener(newValue));
+        leftTable.setOnMousePressed(event -> {
+            if(event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                FileModelForApp file = leftTable.getSelectionModel().getSelectedItem();
+                if(file != null) {
+                    objectInLeftListListener(file);
+                }
+            }
+        });
+        rightTable.setOnMousePressed(event -> {
+            if(event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                FileModelForApp file = rightTable.getSelectionModel().getSelectedItem();
+                if(file != null) {
+                    objectInRightListListener(file);
+                }
+            }
+        });
     }
 
     @FXML

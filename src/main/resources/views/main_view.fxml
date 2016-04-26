@@ -16,6 +16,8 @@
         <menus>
           <Menu id="filesMenu" mnemonicParsing="false" text="%files.title">
             <items>
+                <MenuItem  mnemonicParsing="false" text="Nowy plik" />
+                <MenuItem  mnemonicParsing="false" text="Nowy folder" />
                   <MenuItem id="compresOption" mnemonicParsing="false" text="%zip.title" />
                   <MenuItem id="decompresOption" mnemonicParsing="false" text="%unzip.title" />
                   <MenuItem id="propertiesOption" mnemonicParsing="false" text="%properties.title" />
