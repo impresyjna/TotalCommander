@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jcommander.controllers.MainViewController">
    <children>
       <MenuBar fx:id="TopMenuBar" prefHeight="29.0" prefWidth="1024.0">
         <menus>
-          <Menu id="filesMenu" mnemonicParsing="false" text="Pliki">
+          <Menu id="filesMenu" mnemonicParsing="false" text="%files.title">
             <items>
-                  <MenuItem id="changeAttributesOption" mnemonicParsing="false" text="Zmień atrybuty" />
-                  <MenuItem id="compresOption" mnemonicParsing="false" text="Spakuj" />
-                  <MenuItem id="decompresOption" mnemonicParsing="false" text="Rozpakuj" />
-                  <MenuItem id="propertiesOption" mnemonicParsing="false" text="Właściwości" />
-                  <MenuItem id="calculateOccupiedSpaceOption" mnemonicParsing="false" text="Oblicz zajmowaną przestrzeń" />
-                  <MenuItem id="editCommentOption" mnemonicParsing="false" text="Edytuj komentarz" />
-                  <Menu mnemonicParsing="false" text="Unspecified Menu">
+                  <MenuItem id="compresOption" mnemonicParsing="false" text="%zip.title" />
+                  <MenuItem id="decompresOption" mnemonicParsing="false" text="%unzip.title" />
+                  <MenuItem id="propertiesOption" mnemonicParsing="false" text="%properties.title" />
+                  <Menu mnemonicParsing="false" text="%print.title">
                     <items>
-                      <MenuItem id="filesListOption" mnemonicParsing="false" text="Listę plików..." />
-                        <MenuItem id="filesListWithSubdirectoriesOption" mnemonicParsing="false" text="Listę plików z podkatalogami" />
-                        <MenuItem id="contentOfFIleUnderCursorOption" mnemonicParsing="false" text="Zawartość pliku pod kursorem" />
+                      <MenuItem id="filesListOption" mnemonicParsing="false" text="%filelist.print.title" />
+                        <MenuItem id="filesListWithSubdirectoriesOption" mnemonicParsing="false" text="%filelistwithsubdirectories.print.title" />
+                        <MenuItem id="contentOfFIleUnderCursorOption" mnemonicParsing="false" text="%filecontentundercursor.print.title" />
                     </items>
                   </Menu>
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem id="splitFileOption" mnemonicParsing="false" text="Podziel plik" />
-                  <MenuItem id="mergeFileOption" mnemonicParsing="false" text="Scalaj plik" />
                   <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#closeApp" text="%app.close" />
             </items>
@@ -45,30 +40,15 @@
                   <MenuItem mnemonicParsing="false" text="Unspecified Action" />
             </items>
           </Menu>
-          <Menu id="commandsMenu" mnemonicParsing="false" text="Polecenia">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-            <Menu id="networkMenu" mnemonicParsing="false" text="Sieć">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </Menu>
-            <Menu id="viewMenu" mnemonicParsing="false" text="Widok">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </Menu>
             <Menu id="configurationMenu" mnemonicParsing="false" text="Konfiguracja">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Język">
+            <Menu mnemonicParsing="false" text="%language.title">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#changeLanguageToEnglish" text="Angielski" />
-                  <MenuItem mnemonicParsing="false" onAction="#changeLanguageToPolish" text="Polski" />
+                <MenuItem mnemonicParsing="false" onAction="#changeLanguageToEnglish" text="%english.language.title" />
+                  <MenuItem mnemonicParsing="false" onAction="#changeLanguageToPolish" text="%polish.language.title" />
               </items>
             </Menu>
             <Menu id="startMenu" mnemonicParsing="false" text="Start">
@@ -94,9 +74,9 @@
          <children>
             <TableView fx:id="leftTable" layoutX="14.0" layoutY="29.0" prefHeight="663.0" prefWidth="484.0">
               <columns>
-                <TableColumn fx:id="nameColumnLeft" maxWidth="1.7976931348623157E308" prefWidth="147.0" text="Nazwa" />
-                <TableColumn fx:id="sizeColumnLeft" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="Wielkość" />
-                  <TableColumn fx:id="dateColumnLeft" maxWidth="1.7976931348623157E308" prefWidth="136.0" text="Czas" />
+                <TableColumn fx:id="nameColumnLeft" maxWidth="1.7976931348623157E308" prefWidth="147.0" text="%name.column.title" />
+                <TableColumn fx:id="sizeColumnLeft" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="%size.column.title" />
+                  <TableColumn fx:id="dateColumnLeft" maxWidth="1.7976931348623157E308" prefWidth="136.0" text="%time.column.title" />
               </columns>
             </TableView>
          </children>
@@ -105,9 +85,9 @@
          <children>
             <TableView fx:id="rightTable" layoutX="8.0" layoutY="29.0" prefHeight="663.0" prefWidth="484.0">
                <columns>
-                  <TableColumn fx:id="nameColumnRight" maxWidth="1.7976931348623157E308" prefWidth="147.0" text="Nazwa" />
-                  <TableColumn fx:id="sizeColumnRight" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="Wielkość" />
-                  <TableColumn fx:id="dateColumnRight" maxWidth="1.7976931348623157E308" prefWidth="136.0" text="Czas" />
+                  <TableColumn fx:id="nameColumnRight" maxWidth="1.7976931348623157E308" prefWidth="147.0" text="%name.column.title" />
+                  <TableColumn fx:id="sizeColumnRight" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="%size.column.title" />
+                  <TableColumn fx:id="dateColumnRight" maxWidth="1.7976931348623157E308" prefWidth="136.0" text="%time.column.title" />
                </columns>
             </TableView>
          </children>
