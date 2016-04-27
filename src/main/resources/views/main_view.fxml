@@ -31,7 +31,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="%edit.title">
                 <items>
-
+                    <MenuItem mnemonicParsing="false" text="Usuń" onAction="#deleteActionOnClick"/>
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="%language.title">

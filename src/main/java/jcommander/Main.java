@@ -17,7 +17,7 @@ import java.util.Observer;
 public class Main extends Application implements Observer {
 
     private FXMLLoader loader;
-    private Stage primaryStage;
+    private static Stage primaryStage;
     private BorderPane rootLayout;
     private Parent root;
 
@@ -90,5 +90,9 @@ public class Main extends Application implements Observer {
         this.primaryStage.getScene().setRoot(root);
         MainViewController controller = this.loader.getController();
         controller.setMainApp(this);
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 }

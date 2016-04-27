@@ -1,8 +1,12 @@
 package jcommander.controllers;
 
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,11 +15,16 @@ import javafx.scene.control.TextField;
 import jcommander.Main;
 import jcommander.comparators.SizeComparator;
 import jcommander.models.FileModelForApp;
+import jcommander.operations.DeleteFile;
+import jcommander.tasks.FileOperationTask;
 import jcommander.utils.AppBundle;
+import jcommander.utils.DialogUtil;
 import jcommander.utils.FilesUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainViewController {
 
@@ -73,32 +82,30 @@ public class MainViewController {
     }
 
     private void objectInLeftListListener(FileModelForApp file) {
-        System.out.println(file.getPathToFile());
-        if (file.isDirectory()) {
-            leftTable.setItems(new FilesUtils().fileList(file.getPathToFile()));
-            leftTablePath.set(file.getPathToFile());
+        if (file.getFileInModel().isDirectory()) {
+            leftTable.setItems(new FilesUtils().fileList(file.getFileInModel().getPath()));
+            leftTablePath.set(file.getFileInModel().getPath());
             leftTablePathInputOutput.textProperty().bind(leftTablePath);
         }
     }
 
     private void objectInRightListListener(FileModelForApp file) {
-        System.out.println(file.getPathToFile());
-        if (file.isDirectory()) {
-            rightTable.setItems(new FilesUtils().fileList(file.getPathToFile()));
-            rightTablePath.set(file.getPathToFile());
+        if (file.getFileInModel().isDirectory()) {
+            rightTable.setItems(new FilesUtils().fileList(file.getFileInModel().getPath()));
+            rightTablePath.set(file.getFileInModel().getPath());
             rightTablePathInputOutput.textProperty().bind(rightTablePath);
         }
     }
 
     private void fileLeftChosen(FileModelForApp fileModelForApp){
         StringProperty fileName = new SimpleStringProperty();
-        fileName.set(fileModelForApp.getPathToFile());
+        fileName.set(fileModelForApp.getFileInModel().getPath());
         leftTableLabel.textProperty().bind(fileName);
     }
 
     private void fileRightChosen(FileModelForApp fileModelForApp){
         StringProperty fileName = new SimpleStringProperty();
-        fileName.set(fileModelForApp.getPathToFile());
+        fileName.set(fileModelForApp.getFileInModel().getPath());
         rightTableLabel.textProperty().bind(fileName);
     }
 
@@ -160,7 +167,6 @@ public class MainViewController {
         }
     }
 
-
     @FXML
     private void onRightInputOutputChange(ActionEvent event){
         File file = new File(rightTablePathInputOutput.getText());
@@ -207,6 +213,29 @@ public class MainViewController {
             System.out.println("LEFT");
         } else if (rightTable.isFocused()) {
             System.out.println("RIGHT");
+        }
+    }
+
+    @FXML
+    private void deleteActionOnClick(ActionEvent event) {
+        if(DialogUtil.deleteDialog()) {
+            ObservableList<FileModelForApp> fileListEntries = FXCollections.observableArrayList();
+            if (leftTable.isFocused()) {
+                fileListEntries = leftTable.getSelectionModel().getSelectedItems();
+            } else if (rightTable.isFocused()) {
+                fileListEntries = rightTable.getSelectionModel().getSelectedItems();
+            }
+
+            List<File> filesToDelete = fileListEntries.stream().
+                    map(FileModelForApp::getFileInModel).collect(Collectors.toList());
+
+            BooleanProperty isCanceledProperty = new SimpleBooleanProperty(false);
+            DeleteFile deleteFiles = new DeleteFile(filesToDelete, isCanceledProperty);
+            try {
+                new Thread(new FileOperationTask(deleteFiles, filesToDelete, isCanceledProperty)).start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

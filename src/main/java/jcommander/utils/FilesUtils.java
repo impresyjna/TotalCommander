@@ -30,16 +30,16 @@ public class FilesUtils {
         if (file.isDirectory()) {
             List<File> files = Arrays.asList(file.listFiles());
             if (file.getParentFile() != null) {
-                listOfFiles.add(new FileModelForApp("[...]", "<DIR>", "", file.getParentFile().getPath(), file.getParentFile().isDirectory()));
+                listOfFiles.add(new FileModelForApp("[...]", "<DIR>", "", file.getParentFile()));
             }
             Collections.sort(files, Ordering.from(new FileTypeComparator()).compound(new FileNameComparator()));
             for (File tempFile : files) {
                 if (!tempFile.getName().startsWith(".")) {
                     String formattedDate = df.format(getAttributeOfFile(tempFile).creationTime().toMillis());
                     if (tempFile.isDirectory()) {
-                        listOfFiles.add(new FileModelForApp(tempFile.getName(), "<DIR>", formattedDate, tempFile.getPath(), tempFile.isDirectory()));
+                        listOfFiles.add(new FileModelForApp(tempFile.getName(), "<DIR>", formattedDate, tempFile));
                     } else if (tempFile.isFile()) {
-                        listOfFiles.add(new FileModelForApp(tempFile.getName(), Long.toString(tempFile.length()) + " B", formattedDate, tempFile.getPath(), tempFile.isDirectory()));
+                        listOfFiles.add(new FileModelForApp(tempFile.getName(), Long.toString(tempFile.length()) + " B", formattedDate, tempFile));
                     }
                 }
             }
@@ -61,6 +61,6 @@ public class FilesUtils {
     public FileModelForApp fileToFileModelForApp(File file){
         DateFormat df = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, AppBundle.getInstance().getCurrentLocale());
         String formattedDate = df.format(getAttributeOfFile(file).creationTime().toMillis());
-        return new FileModelForApp(file.getName(), Long.toString(file.length())+" B", formattedDate, file.getPath(), file.isDirectory());
+        return new FileModelForApp(file.getName(), Long.toString(file.length())+" B", formattedDate, file);
     }
 }
