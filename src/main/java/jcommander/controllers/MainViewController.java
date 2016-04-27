@@ -17,6 +17,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import jcommander.Main;
+import jcommander.comparators.DateComparator;
 import jcommander.comparators.NameComparator;
 import jcommander.comparators.SizeComparator;
 import jcommander.models.FileModelForApp;
@@ -131,6 +132,7 @@ public class MainViewController {
         dateColumnLeft.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         sizeColumnLeft.setComparator(new SizeComparator());
         nameColumnLeft.setComparator(new NameComparator());
+        dateColumnLeft.setComparator(new DateComparator());
         leftTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         leftTable.setOnMousePressed(event -> {
             if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
@@ -154,6 +156,7 @@ public class MainViewController {
 
         sizeColumnRight.setComparator(new SizeComparator());
         nameColumnRight.setComparator(new NameComparator());
+        dateColumnRight.setComparator(new DateComparator());
         rightTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         rightTable.setOnMousePressed(event -> {
