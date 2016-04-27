@@ -30,10 +30,10 @@ import jcommander.utils.FilesUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.nio.file.Path;
 
 public class MainViewController {
 
@@ -88,6 +88,7 @@ public class MainViewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     private void objectInLeftListListener(FileModelForApp file) {
