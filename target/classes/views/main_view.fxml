@@ -100,9 +100,9 @@
                <Label fx:id="rightTableLabel" prefHeight="17.0" prefWidth="484.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                <TableView fx:id="leftTable" prefHeight="379.0" prefWidth="493.0" style="-fx-background-color: #b2dfdb;" GridPane.rowIndex="1">
                    <columns>
-                       <TableColumn fx:id="nameColumnLeft" maxWidth="-1.0" minWidth="-1.0" prefWidth="125.0" text="%name.column.title" />
-                       <TableColumn fx:id="sizeColumnLeft" maxWidth="-1.0" minWidth="-1.0" prefWidth="174.0" text="%size.column.title" />
-                       <TableColumn fx:id="dateColumnLeft" maxWidth="-1.0" minWidth="-1.0" prefWidth="191.0" text="%time.column.title" />
+                       <TableColumn fx:id="nameColumnLeft" maxWidth="125.0" minWidth="20.0" prefWidth="125.0" text="%name.column.title" />
+                       <TableColumn fx:id="sizeColumnLeft" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="174.0" text="%size.column.title" />
+                       <TableColumn fx:id="dateColumnLeft" maxWidth="1.7976931348623157E308" prefWidth="191.0" text="%time.column.title" />
                    </columns>
                    <columnResizePolicy>
                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

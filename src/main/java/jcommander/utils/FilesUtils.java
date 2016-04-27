@@ -30,7 +30,7 @@ public class FilesUtils {
         if (file.isDirectory()) {
             List<File> files = Arrays.asList(file.listFiles());
             if (file.getParentFile() != null) {
-                listOfFiles.add(new FileModelForApp("[...]", "<DIR>", "", file.getParentFile()));
+                listOfFiles.add(new FileModelForApp("[...]", "<ROOT>", "", file.getParentFile()));
             }
             Collections.sort(files, Ordering.from(new FileTypeComparator()).compound(new FileNameComparator()));
             for (File tempFile : files) {

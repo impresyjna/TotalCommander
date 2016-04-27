@@ -11,6 +11,12 @@ public class SizeComparator implements Comparator<String> {
     public int compare(String size1, String size2) {
         long size1InLong = 0;
         long size2InLong = 0;
+        if(size1.equals("<ROOT>")){
+            return Integer.MIN_VALUE;
+        }
+        if(size2.equals("<ROOT>")){
+            return Integer.MIN_VALUE;
+        }
         if (!size1.equals("<DIR>")) {
             size1InLong = Long.parseLong(size1.replace(" B", ""));
         }
