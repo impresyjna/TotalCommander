@@ -2,6 +2,7 @@ package jcommander.tasks;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.concurrent.Task;
+import jcommander.controllers.MainViewController;
 import jcommander.operations.FileOperation;
 import jcommander.views.ProgressDialogView;
 
@@ -16,18 +17,20 @@ public class FileOperationTask extends Task<Void> {
     private FileOperation fileOperation;
     private BooleanProperty isCanceledProperty;
     private ProgressDialogView progressDialog;
+    private MainViewController controller;
 
-    public FileOperationTask(FileOperation fileOperation, BooleanProperty isCanceledProperty) throws IOException {
+    public FileOperationTask(FileOperation fileOperation, BooleanProperty isCanceledProperty, MainViewController mainViewController) throws IOException {
         this.fileOperation = fileOperation;
         this.isCanceledProperty = isCanceledProperty;
         this.progressDialog = new ProgressDialogView();
+        this.controller = mainViewController;
 
         progressDialog.setTask(this);
         this.setOnCancelled(event -> {
             this.isCanceledProperty.set(true);
             progressDialog.close();
         });
-        this.setOnSucceeded(event -> progressDialog.close());
+        this.setOnSucceeded(event -> onSuccess());
         progressDialog.show();
     }
 
@@ -41,5 +44,10 @@ public class FileOperationTask extends Task<Void> {
 
         fileOperation.execute();
         return null;
+    }
+
+    private void onSuccess(){
+        controller.refreshLists();
+        progressDialog.close();
     }
 }

@@ -106,6 +106,11 @@ public class MainViewController {
         }
     }
 
+    public void refreshLists(){
+        leftTable.setItems(new FilesUtils().fileList(leftTablePath.get()));
+        rightTable.setItems(new FilesUtils().fileList(rightTablePath.get()));
+    }
+
     private void fileLeftChosen(FileModelForApp fileModelForApp){
         StringProperty fileName = new SimpleStringProperty();
         fileName.set(fileModelForApp.getFileInModel().getPath());
@@ -243,7 +248,7 @@ public class MainViewController {
             BooleanProperty isCanceledProperty = new SimpleBooleanProperty(false);
             DeleteFile deleteFiles = new DeleteFile(pathsToDelete, isCanceledProperty);
             try {
-                new Thread(new FileOperationTask(deleteFiles, isCanceledProperty)).start();
+                new Thread(new FileOperationTask(deleteFiles, isCanceledProperty, this)).start();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -288,7 +293,7 @@ public class MainViewController {
                 }
 
                 try {
-                    new Thread(new FileOperationTask(fileOperation, isCanceledProperty)).start();
+                    new Thread(new FileOperationTask(fileOperation, isCanceledProperty,this)).start();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
