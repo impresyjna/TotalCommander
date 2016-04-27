@@ -3,8 +3,6 @@ package jcommander.controllers;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -79,7 +77,6 @@ public class MainViewController {
         if (file.isDirectory()) {
             leftTable.setItems(new FilesUtils().fileList(file.getPathToFile()));
             leftTablePath.set(file.getPathToFile());
-            leftTableLabel.textProperty().bind(leftTablePath);
             leftTablePathInputOutput.textProperty().bind(leftTablePath);
         }
     }
@@ -89,9 +86,20 @@ public class MainViewController {
         if (file.isDirectory()) {
             rightTable.setItems(new FilesUtils().fileList(file.getPathToFile()));
             rightTablePath.set(file.getPathToFile());
-            rightTableLabel.textProperty().bind(rightTablePath);
             rightTablePathInputOutput.textProperty().bind(rightTablePath);
         }
+    }
+
+    private void fileLeftChosen(FileModelForApp fileModelForApp){
+        StringProperty fileName = new SimpleStringProperty();
+        fileName.set(fileModelForApp.getPathToFile());
+        leftTableLabel.textProperty().bind(fileName);
+    }
+
+    private void fileRightChosen(FileModelForApp fileModelForApp){
+        StringProperty fileName = new SimpleStringProperty();
+        fileName.set(fileModelForApp.getPathToFile());
+        rightTableLabel.textProperty().bind(fileName);
     }
 
     private void initializeLeftTab() {
@@ -105,6 +113,11 @@ public class MainViewController {
                 FileModelForApp file = leftTable.getSelectionModel().getSelectedItem();
                 if (file != null) {
                     objectInLeftListListener(file);
+                }
+            } else if(event.isPrimaryButtonDown() && event.getClickCount() == 1) {
+                FileModelForApp file = leftTable.getSelectionModel().getSelectedItem();
+                if (file != null) {
+                    fileLeftChosen(file);
                 }
             }
         });
@@ -123,6 +136,11 @@ public class MainViewController {
                 FileModelForApp file = rightTable.getSelectionModel().getSelectedItem();
                 if (file != null) {
                     objectInRightListListener(file);
+                }
+            } else if(event.isPrimaryButtonDown() && event.getClickCount() == 1) {
+                FileModelForApp file = rightTable.getSelectionModel().getSelectedItem();
+                if (file != null) {
+                    fileRightChosen(file);
                 }
             }
         });
