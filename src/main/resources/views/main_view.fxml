@@ -12,7 +12,7 @@
           <Menu id="filesMenu" mnemonicParsing="false" text="%files.title">
             <items>
                 <MenuItem  mnemonicParsing="false" text="Nowy plik" onAction="#createFile"/>
-                <MenuItem  mnemonicParsing="false" text="Nowy folder" />
+                <MenuItem  mnemonicParsing="false" text="Nowy folder" onAction="#createFolder"/>
                   <MenuItem id="compresOption" mnemonicParsing="false" text="%zip.title" />
                   <MenuItem id="decompresOption" mnemonicParsing="false" text="%unzip.title" />
                   <MenuItem id="propertiesOption" mnemonicParsing="false" text="%properties.title" />
@@ -27,11 +27,21 @@
               <MenuItem mnemonicParsing="false" onAction="#closeApp" text="%app.close" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="%edit.title">
+                <items>
+
+                </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="%language.title">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#changeLanguageToEnglish" text="%english.language.title" />
                   <MenuItem mnemonicParsing="false" onAction="#changeLanguageToPolish" text="%polish.language.title" />
               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="%help.title">
+                <items>
+
+                </items>
             </Menu>
         </menus>
       </MenuBar>

@@ -50,7 +50,6 @@ public class MainViewController {
     public void setMainApp(Main mainApp) {
         this.main = mainApp;
         try {
-            //TODO: Change this to open good directory list
             leftTable.setItems(new FilesUtils().fileList(new File(".").getCanonicalPath()));
             leftTablePath.set(new File(".").getCanonicalPath());
             leftTableLabel.setText(leftTablePath.get());
@@ -147,6 +146,17 @@ public class MainViewController {
 
     @FXML
     private void createFile(ActionEvent event) {
+        //TODO:
+        if (leftTable.isFocused()) {
+            System.out.println("LEFT");
+        } else if (rightTable.isFocused()) {
+            System.out.println("RIGHT");
+        }
+    }
+
+    @FXML
+    private void createFolder(ActionEvent event) {
+        //TODO:
         if (leftTable.isFocused()) {
             System.out.println("LEFT");
         } else if (rightTable.isFocused()) {
