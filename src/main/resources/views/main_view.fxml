@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jcommander.controllers.MainViewController">
    <children>
       <MenuBar fx:id="TopMenuBar" prefHeight="29.0" prefWidth="1024.0">
         <menus>
           <Menu id="filesMenu" mnemonicParsing="false" text="%files.title">
             <items>
-                <MenuItem  mnemonicParsing="false" text="Nowy plik" />
+                <MenuItem  mnemonicParsing="false" text="Nowy plik" onAction="#createFile"/>
                 <MenuItem  mnemonicParsing="false" text="Nowy folder" />
                   <MenuItem id="compresOption" mnemonicParsing="false" text="%zip.title" />
                   <MenuItem id="decompresOption" mnemonicParsing="false" text="%unzip.title" />
@@ -32,34 +27,10 @@
               <MenuItem mnemonicParsing="false" onAction="#closeApp" text="%app.close" />
             </items>
           </Menu>
-          <Menu id="selectMenu" mnemonicParsing="false" text="Zaznacz">
-            <items>
-              <MenuItem id="selectGroupOption" mnemonicParsing="false" text="Zaznacz grupę..." />
-                  <MenuItem id="deselectGroupOption" mnemonicParsing="false" text="Odznacz grupę..." />
-                  <MenuItem id="selectAlllOption" mnemonicParsing="false" text="Zaznacz wszystko" />
-                  <MenuItem id="deselectAllOption" mnemonicParsing="false" text="Odznacz wszystko" />
-                  <MenuItem id="reverseSelectOption" mnemonicParsing="false" text="Odwróć zaznaczenie" />
-                  <MenuItem id="selectAllWithSameExtensionOption" mnemonicParsing="false" text="Zaznacz wszystkie z takim samym rozsz. " />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-            </items>
-          </Menu>
-            <Menu id="configurationMenu" mnemonicParsing="false" text="Konfiguracja">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </Menu>
             <Menu mnemonicParsing="false" text="%language.title">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#changeLanguageToEnglish" text="%english.language.title" />
                   <MenuItem mnemonicParsing="false" onAction="#changeLanguageToPolish" text="%polish.language.title" />
-              </items>
-            </Menu>
-            <Menu id="startMenu" mnemonicParsing="false" text="Start">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
               </items>
             </Menu>
         </menus>
@@ -85,7 +56,7 @@
                   <TableColumn fx:id="dateColumnLeft" maxWidth="1.7976931348623157E308" prefWidth="136.0" text="%time.column.title" />
               </columns>
             </TableView>
-            <Label layoutX="15.0" layoutY="6.0" prefHeight="17.0" prefWidth="476.0" text="Label" />
+            <Label layoutX="15.0" layoutY="6.0" prefHeight="17.0" prefWidth="476.0" text="Label" fx:id="leftTableLabel" />
          </children>
       </Pane>
       <Pane layoutX="511.0" layoutY="88.0" prefHeight="569.0" prefWidth="512.0" style="-fx-background-color: #e0e0e0;">
@@ -97,7 +68,7 @@
                   <TableColumn fx:id="dateColumnRight" maxWidth="1.7976931348623157E308" prefWidth="136.0" text="%time.column.title" />
                </columns>
             </TableView>
-            <Label layoutX="18.0" layoutY="5.0" prefHeight="17.0" prefWidth="476.0" text="Label" />
+            <Label layoutX="18.0" layoutY="5.0" prefHeight="17.0" prefWidth="476.0" text="Label" fx:id="rightTableLabel"/>
          </children>
       </Pane>
       <HBox alignment="CENTER" layoutY="657.0" prefHeight="58.0" prefWidth="1025.0">
