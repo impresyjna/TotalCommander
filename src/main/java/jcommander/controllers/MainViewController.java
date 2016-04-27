@@ -49,38 +49,21 @@ public class MainViewController {
 
     public void setMainApp(Main mainApp) {
         this.main = mainApp;
-        /* new Thread() {
-            public void run() { */
-        try
-
-        {
+        try {
             //TODO: Change this to open good directory list
             leftTable.setItems(new FilesUtils().fileList(new File(".").getCanonicalPath()));
             leftTablePath.set(new File(".").getCanonicalPath());
             leftTableLabel.setText(leftTablePath.get());
-        } catch (
-                IOException e
-                )
-
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-        try
-
-        {
+        try {
             rightTable.setItems(new FilesUtils().fileList(new File(".").getCanonicalPath()));
             rightTablePath.set(new File(".").getCanonicalPath());
             rightTableLabel.setText(rightTablePath.get());
-        } catch (
-                IOException e
-                )
-
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-          /*  }
-        }.start(); */
     }
 
     private void objectInLeftListListener(FileModelForApp file) {
@@ -123,7 +106,7 @@ public class MainViewController {
         });
     }
 
-    private void initializeRightTab(){
+    private void initializeRightTab() {
         nameColumnRight.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         sizeColumnRight.setCellValueFactory(cellData -> cellData.getValue().sizeProperty());
         dateColumnRight.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
@@ -164,9 +147,9 @@ public class MainViewController {
 
     @FXML
     private void createFile(ActionEvent event) {
-        if(leftTable.isFocused()){
+        if (leftTable.isFocused()) {
             System.out.println("LEFT");
-        } else if(rightTable.isFocused()){
+        } else if (rightTable.isFocused()) {
             System.out.println("RIGHT");
         }
     }
