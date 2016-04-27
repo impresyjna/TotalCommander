@@ -31,18 +31,18 @@ public abstract class DialogUtil {
         ResourceBundle bundle = AppBundle.getInstance().getBundle();
 
         Alert dialog = new Alert(Alert.AlertType.CONFIRMATION);
-        dialog.setTitle(bundle.getString("warningTitle"));
-        dialog.setHeaderText(bundle.getString("fileExistHeader"));
-        dialog.setContentText(bundle.getString("replace") + "\n" + fileName + "\n" + sizes[0] + " B, " + dates[0] +
-                "\n" + bundle.getString("with") + "\n" + fileName + "\n" + sizes[1] + " B, " + dates[1]);
+        dialog.setTitle(bundle.getString("warning.title.text"));
+        dialog.setHeaderText(bundle.getString("file.exists.header.text"));
+        dialog.setContentText(bundle.getString("replace.text") + "\n" + fileName + "\n" + sizes[0] + " B, " + dates[0] +
+                "\n" + bundle.getString("with.text") + "\n" + fileName + "\n" + sizes[1] + " B, " + dates[1]);
 
-        ButtonType buttonReplace = new ButtonType(bundle.getString("replaceOption"));
-        ButtonType buttonKeep = new ButtonType(bundle.getString("keepOption"));
-        ButtonType buttonSkip = new ButtonType(bundle.getString("skipOption"));
-        ButtonType buttonReplaceAll = new ButtonType(bundle.getString("replaceAllOption"));
-        ButtonType buttonKeepAll = new ButtonType(bundle.getString("keepAllOption"));
-        ButtonType buttonSkipAll = new ButtonType(bundle.getString("skipAllOption"));
-        ButtonType buttonCancel = new ButtonType(bundle.getString("cancelOption"), ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType buttonReplace = new ButtonType(bundle.getString("replace.option.text"));
+        ButtonType buttonKeep = new ButtonType(bundle.getString("keep.option.text"));
+        ButtonType buttonSkip = new ButtonType(bundle.getString("skip.option.text"));
+        ButtonType buttonReplaceAll = new ButtonType(bundle.getString("replace.all.option.text"));
+        ButtonType buttonKeepAll = new ButtonType(bundle.getString("keep.all.option.text"));
+        ButtonType buttonSkipAll = new ButtonType(bundle.getString("skip.all.option.text"));
+        ButtonType buttonCancel = new ButtonType(bundle.getString("cancel.option.text"), ButtonBar.ButtonData.CANCEL_CLOSE);
 
         dialog.getButtonTypes().setAll(buttonReplace, buttonKeep, buttonSkip,
                 buttonReplaceAll, buttonKeepAll, buttonSkipAll, buttonCancel);
