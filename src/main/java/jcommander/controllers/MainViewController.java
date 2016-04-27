@@ -11,11 +11,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import jcommander.Main;
 import jcommander.comparators.SizeComparator;
 import jcommander.models.FileModelForApp;
+import jcommander.operations.CopyFile;
 import jcommander.operations.DeleteFile;
+import jcommander.operations.FileOperation;
+import jcommander.operations.MoveFile;
 import jcommander.tasks.FileOperationTask;
 import jcommander.utils.AppBundle;
 import jcommander.utils.DialogUtil;
@@ -23,8 +30,10 @@ import jcommander.utils.FilesUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.nio.file.Path;
 
 public class MainViewController {
 
@@ -157,6 +166,8 @@ public class MainViewController {
     private void initialize() {
         initializeLeftTab();
         initializeRightTab();
+        setupDragAndDrop(leftTable, leftTablePath);
+        setupDragAndDrop(rightTable, rightTablePath);
     }
 
     @FXML
@@ -226,16 +237,65 @@ public class MainViewController {
                 fileListEntries = rightTable.getSelectionModel().getSelectedItems();
             }
 
-            List<File> filesToDelete = fileListEntries.stream().
-                    map(FileModelForApp::getFileInModel).collect(Collectors.toList());
+            List<Path> pathsToDelete = fileListEntries.stream().
+                    map(fileListEntry -> Paths.get(fileListEntry.getFileInModel().getPath())).collect(Collectors.toList());
 
             BooleanProperty isCanceledProperty = new SimpleBooleanProperty(false);
-            DeleteFile deleteFiles = new DeleteFile(filesToDelete, isCanceledProperty);
+            DeleteFile deleteFiles = new DeleteFile(pathsToDelete, isCanceledProperty);
             try {
-                new Thread(new FileOperationTask(deleteFiles, filesToDelete, isCanceledProperty)).start();
+                new Thread(new FileOperationTask(deleteFiles, isCanceledProperty)).start();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void setupDragAndDrop(TableView tableView, StringProperty path) {
+        boolean canBeDropped = true;
+
+        tableView.setOnDragDetected(event -> {
+            List<FileModelForApp> selected = tableView.getSelectionModel().getSelectedItems();
+            if (selected.size() != 0) {
+                Dragboard db = tableView.startDragAndDrop(TransferMode.COPY_OR_MOVE);
+                ClipboardContent content = new ClipboardContent();
+                content.putFiles(selected.stream().map(FileModelForApp::getFileInModel).collect(Collectors.toList()));
+                db.setContent(content);
+                event.consume();
+            }
+        });
+
+        tableView.setOnDragOver(event -> {
+            if (event.getGestureSource() != tableView && event.getDragboard().hasFiles() && canBeDropped) {
+                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+            }
+            event.consume();
+        });
+
+        tableView.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (event.getDragboard().hasFiles()) {
+                List<File> files = db.getFiles();
+                List<Path> paths = files.stream().map(File::getPath).map(Paths::get).collect(Collectors.toList());
+
+                BooleanProperty isCanceledProperty = new SimpleBooleanProperty(false);
+
+                FileOperation fileOperation;
+                if (event.getTransferMode() == TransferMode.COPY) {
+                    fileOperation = new CopyFile(paths, isCanceledProperty, Paths.get(path.get()));
+                } else {
+                    fileOperation = new MoveFile(paths, isCanceledProperty, Paths.get(path.get()));
+                }
+
+                try {
+                    new Thread(new FileOperationTask(fileOperation, isCanceledProperty)).start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                success = true;
+            }
+            event.setDropCompleted(success);
+            event.consume();
+        });
     }
 }

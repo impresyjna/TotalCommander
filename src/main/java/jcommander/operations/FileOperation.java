@@ -14,11 +14,11 @@ import java.util.List;
  */
 public abstract class FileOperation extends SimpleFileVisitor<Path> {
     ReadOnlyLongWrapper progress;
-    protected List<File> files;
+    List<Path> paths;
     BooleanProperty isCanceledProperty;
 
-    FileOperation(List<File> files, BooleanProperty isCanceledProperty) {
-        this.files = files;
+    FileOperation(List<Path> paths, BooleanProperty isCanceledProperty) {
+        this.paths = paths;
         this.isCanceledProperty = isCanceledProperty;
         this.progress = new ReadOnlyLongWrapper(this, "progress");
     }
@@ -32,4 +32,8 @@ public abstract class FileOperation extends SimpleFileVisitor<Path> {
     }
 
     public abstract void execute() throws IOException;
+
+    public List<Path> getPaths() {
+        return paths;
+    }
 }
