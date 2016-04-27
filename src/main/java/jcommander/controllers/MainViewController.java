@@ -3,10 +3,13 @@ package jcommander.controllers;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import jcommander.Main;
 import jcommander.comparators.SizeComparator;
 import jcommander.models.FileModelForApp;
@@ -43,7 +46,11 @@ public class MainViewController {
     @FXML
     private javafx.scene.control.TableColumn<FileModelForApp, String> dateColumnRight;
     @FXML
+    private TextField rightTablePathInputOutput;
+    @FXML
     private Label rightTableLabel;
+    @FXML
+    private TextField leftTablePathInputOutput;
     @FXML
     private Label leftTableLabel;
 
@@ -53,6 +60,7 @@ public class MainViewController {
             leftTable.setItems(new FilesUtils().fileList(new File(".").getCanonicalPath()));
             leftTablePath.set(new File(".").getCanonicalPath());
             leftTableLabel.setText(leftTablePath.get());
+            leftTablePathInputOutput.setText(leftTablePath.get());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,6 +68,7 @@ public class MainViewController {
             rightTable.setItems(new FilesUtils().fileList(new File(".").getCanonicalPath()));
             rightTablePath.set(new File(".").getCanonicalPath());
             rightTableLabel.setText(rightTablePath.get());
+            rightTablePathInputOutput.setText(rightTablePath.get());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,6 +80,7 @@ public class MainViewController {
             leftTable.setItems(new FilesUtils().fileList(file.getPathToFile()));
             leftTablePath.set(file.getPathToFile());
             leftTableLabel.textProperty().bind(leftTablePath);
+            leftTablePathInputOutput.textProperty().bind(leftTablePath);
         }
     }
 
@@ -80,13 +90,8 @@ public class MainViewController {
             rightTable.setItems(new FilesUtils().fileList(file.getPathToFile()));
             rightTablePath.set(file.getPathToFile());
             rightTableLabel.textProperty().bind(rightTablePath);
+            rightTablePathInputOutput.textProperty().bind(rightTablePath);
         }
-    }
-
-    @FXML
-    private void initialize() {
-        initializeLeftTab();
-        initializeRightTab();
     }
 
     private void initializeLeftTab() {
@@ -121,6 +126,29 @@ public class MainViewController {
                 }
             }
         });
+    }
+
+    @FXML
+    private void initialize() {
+        initializeLeftTab();
+        initializeRightTab();
+    }
+
+    @FXML
+    private void onLeftInputOuputChange(ActionEvent event){
+        File file = new File(leftTablePathInputOutput.getText());
+        if(file.exists() && file.isDirectory() && !file.getName().startsWith(".")){
+            objectInLeftListListener(new FilesUtils().fileToFileModelForApp(file));
+        }
+    }
+
+
+    @FXML
+    private void onRightInputOutputChange(ActionEvent event){
+        File file = new File(rightTablePathInputOutput.getText());
+        if(file.exists() && file.isDirectory() && !file.getName().startsWith(".")){
+            objectInRightListListener(new FilesUtils().fileToFileModelForApp(file));
+        }
     }
 
     @FXML

@@ -57,4 +57,10 @@ public class FilesUtils {
         }
         return attr;
     }
+
+    public FileModelForApp fileToFileModelForApp(File file){
+        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, AppBundle.getInstance().getCurrentLocale());
+        String formattedDate = df.format(getAttributeOfFile(file).creationTime().toMillis());
+        return new FileModelForApp(file.getName(), Long.toString(file.length())+" B", formattedDate, file.getPath(), file.isDirectory());
+    }
 }
