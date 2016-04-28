@@ -3,6 +3,7 @@ package jcommander.models;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import javax.swing.*;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.Date;
@@ -11,16 +12,18 @@ import java.util.Date;
  * Created by impresyjna on 25.04.2016.
  */
 public class FileModelForApp {
+    private NameColumnModel nameColumnModel;
     private StringProperty name = new SimpleStringProperty();
     private StringProperty size = new SimpleStringProperty();
     private StringProperty date = new SimpleStringProperty();
     private File fileInModel;
 
-    public FileModelForApp(String name, String size, String date, File file) {
+    public FileModelForApp(String name, String size, String date, File file, Icon icon) {
         this.name.set(name);
         this.size.set(size);
         this.date.set(date);
         this.fileInModel = file;
+        this.nameColumnModel=new NameColumnModel(file.getName(), icon);
     }
 
     public StringProperty nameProperty() {
@@ -65,5 +68,9 @@ public class FileModelForApp {
 
     public void setFileInModel(File fileInModel) {
         this.fileInModel = fileInModel;
+    }
+
+    public NameColumnModel getNameColumnModel() {
+        return nameColumnModel;
     }
 }

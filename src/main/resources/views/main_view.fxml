@@ -66,28 +66,6 @@
                    </columns>
                </TableView>
              <Pane prefHeight="620.0" prefWidth="512.0" style="-fx-background-color: #e0f2f1;">
-                 <children>
-                  <GridPane alignment="CENTER" prefHeight="48.0" prefWidth="484.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="85.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                             <Label text="%path.text" />
-                             <TextField fx:id="leftTablePathInputOutput" onAction="#onLeftInputOuputChange" prefHeight="27.0" prefWidth="360.0" GridPane.columnIndex="1">
-                           <GridPane.margin>
-                              <Insets right="10.0" />
-                           </GridPane.margin>
-                        </TextField>
-                     </children>
-                     <padding>
-                        <Insets left="15.0" />
-                     </padding>
-                  </GridPane>
-                 </children>
                <opaqueInsets>
                   <Insets bottom="15.0" top="15.0" />
                </opaqueInsets>
@@ -126,6 +104,26 @@
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
+            </GridPane>
+            <GridPane prefHeight="30.0" prefWidth="485.0">
+               <children>
+                  <Label text="%path.text" />
+                  <TextField fx:id="leftTablePathInputOutput" onAction="#onLeftInputOuputChange" prefHeight="27.0" prefWidth="360.0" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets right="15.0" />
+                     </GridPane.margin>
+                  </TextField>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="85.0" prefWidth="100.0" />
+               </columnConstraints>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
             </GridPane>
          </children>
       </GridPane>
