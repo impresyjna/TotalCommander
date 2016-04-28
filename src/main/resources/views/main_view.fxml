@@ -13,8 +13,8 @@
         <menus>
           <Menu id="filesMenu" mnemonicParsing="false" text="%files.title">
             <items>
-                <MenuItem mnemonicParsing="false" onAction="#createFile" text="Nowy plik" />
-                <MenuItem mnemonicParsing="false" onAction="#createFolder" text="Nowy folder" />
+                <MenuItem mnemonicParsing="false" onAction="#createFile" text="%new.file.text" />
+                <MenuItem mnemonicParsing="false" onAction="#createFolder" text="%new.folder.text" />
                   <MenuItem id="compresOption" mnemonicParsing="false" text="%zip.title" />
                   <MenuItem id="decompresOption" mnemonicParsing="false" text="%unzip.title" />
                   <MenuItem id="propertiesOption" mnemonicParsing="false" text="%properties.title" />
@@ -31,7 +31,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="%edit.title">
                 <items>
-                    <MenuItem mnemonicParsing="false" onAction="#deleteActionOnClick" text="Usuń " />
+                    <MenuItem mnemonicParsing="false" onAction="#deleteActionOnClick" text="%delete.text" />
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="%language.title">
